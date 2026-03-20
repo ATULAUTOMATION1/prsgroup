@@ -160,19 +160,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 7. Navratri Popup Logic
+    // 7. Dynamic Navratri Popup Logic (Chaitra Navratri 2026: Mar 18 - Mar 26)
     const popupOverlay = document.getElementById('festivalPopup');
     const closeBtn = document.getElementById('closePopup');
+    const popupImg = document.querySelector('.popup-img');
+    const popupHeading = document.querySelector('.popup-content h3');
     
-    if (popupOverlay) {
-        // Show after 2 seconds
-        setTimeout(() => {
-            const hasSeenPopup = sessionStorage.getItem('hasSeenNavratriPopup');
-            if (!hasSeenPopup) {
-                popupOverlay.classList.add('active');
-                sessionStorage.setItem('hasSeenNavratriPopup', 'true');
-            }
-        }, 2000);
+    if (popupOverlay && popupImg) {
+        const navratriImages = {
+            18: { img: 'navratri_day_1_shailputri_1773927818026.png', title: 'Day 1: Maa Shailputri' },
+            19: { img: 'navratri_day_2_brahmacharini_1773927841627.png', title: 'Day 2: Maa Brahmacharini' },
+            20: { img: 'navratri_day_3_chandraghanta_1773927877387.png', title: 'Day 3: Maa Chandraghanta' },
+            21: { img: 'navratri_day_4_kushmanda_1773927904348.png', title: 'Day 4: Maa Kushmanda' },
+            22: { img: 'navratri_day_5_skandamata_1773927935431.png', title: 'Day 5: Maa Skandamata' },
+            23: { img: 'navratri_day_6_katyayani_1773927963113.png', title: 'Day 6: Maa Katyayani' },
+            24: { img: 'navratri_day_7_kalaratri_1773927988662.png', title: 'Day 7: Maa Kalaratri' },
+            25: { img: 'navratri_day_8_mahagauri_1773928016345.png', title: 'Day 8: Maa Mahagauri' },
+            26: { img: 'navratri_day_9_siddhidatri_1773928047505.png', title: 'Day 9: Maa Siddhidatri' }
+        };
+
+        const today = new Date();
+        const month = today.getMonth(); // 2 is March
+        const date = today.getDate();
+
+        // Check if we are in the Navratri window (Mar 18 - Mar 26, 2026)
+        if (month === 2 && navratriImages[date]) {
+            const data = navratriImages[date];
+            popupImg.src = 'assets/' + data.img;
+            if (popupHeading) popupHeading.innerText = 'Jai Mata Di! ' + data.title;
+
+            // Show after 2 seconds
+            setTimeout(() => {
+                const storageKey = 'hasSeenNavratriPopup_' + date; // Once per day
+                const hasSeenPopup = sessionStorage.getItem(storageKey);
+                if (!hasSeenPopup) {
+                    popupOverlay.classList.add('active');
+                    sessionStorage.setItem(storageKey, 'true');
+                }
+            }, 2000);
+        }
 
         closeBtn.addEventListener('click', () => {
             popupOverlay.classList.remove('active');
