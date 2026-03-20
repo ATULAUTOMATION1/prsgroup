@@ -4,6 +4,7 @@
   "description": "PRS GROUP Static Industrial Engineering Website",
   "private": true,
   "scripts": {
+    "dev": "npx serve .",
     "build": "mkdir -p dist && cp -r *.html style.css main.js assets robots.txt sitemap.xml dist/",
     "start": "echo 'Static site: No build required' && exit 0"
   }
