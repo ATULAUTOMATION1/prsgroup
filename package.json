@@ -1,0 +1,9 @@
+{
+  "name": "prsgroup",
+  "version": "1.0.0",
+  "description": "PRS GROUP Static Industrial Engineering Website",
+  "private": true,
+  "scripts": {
+    "start": "echo 'Static site: No build required' && exit 0"
+  }
+}
