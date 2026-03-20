@@ -196,6 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!hasSeenPopup) {
                     popupOverlay.classList.add('active');
                     sessionStorage.setItem(storageKey, 'true');
+
+                    // AUTO-CLOSE after 10 seconds (User requested automatic behavior)
+                    setTimeout(() => {
+                        popupOverlay.classList.remove('active');
+                    }, 10000);
                 }
             }, 2000);
         }
